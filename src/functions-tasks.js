@@ -8,7 +8,7 @@
  *                                                                                             *
  ********************************************************************************************* */
 
-/**
+/** 1
  * Returns the name of the current function.
  *
  * @return {string} - The name of the current function.
@@ -21,7 +21,7 @@ function getCurrentFunctionName() {
   return getCurrentFunctionName.name;
 }
 
-/**
+/** 2
  * Returns the body of the function passed as argument.
  *
  * @param {Function} func - Function to get the body.
@@ -37,7 +37,7 @@ function getFunctionBody(func) {
   return func.toString().trim();
 }
 
-/**
+/** 3
  * Returns the array where each element is the count of function arguments.
  *
  * @param {Function[]} funcs - The array of functions.
@@ -55,7 +55,7 @@ function getArgumentsCount(funcs) {
   return funcs.map((func) => func.length);
 }
 
-/**
+/** 4
  * Returns the math power function with the specified exponent
  *
  * @param {number} exponent
@@ -71,11 +71,11 @@ function getArgumentsCount(funcs) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return (a) => a ** exponent;
 }
 
-/**
+/** 5
  * Returns the polynom function of one argument based on specified coefficients.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
  *
@@ -88,11 +88,18 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom(/* ...coefficients */) {
-  throw new Error('Not implemented');
+function getPolynom(...coefficients) {
+  return (x) => {
+    if (coefficients.length === 0) return null;
+    let y = 0;
+    for (let i = coefficients.length - 1; i >= 0; i -= 1) {
+      y += coefficients[i] * x ** (coefficients.length - 1 - i);
+    }
+    return y;
+  };
 }
 
-/**
+/** 6
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
  *
@@ -106,11 +113,15 @@ function getPolynom(/* ...coefficients */) {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  let mem = null;
+  return (a) => {
+    if (mem === null) mem = func(a);
+    return mem;
+  };
 }
 
-/**
+/** 7
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
  *
@@ -129,7 +140,7 @@ function retry(/* func, attempts */) {
   throw new Error('Not implemented');
 }
 
-/**
+/** 8
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
  * Logger has to log the arguments of invoked function.
@@ -156,7 +167,7 @@ function logger(/* func, logFunc */) {
   throw new Error('Not implemented');
 }
 
-/**
+/** 9
  * Return the function with partial applied arguments
  *
  * @param {Function} fn
@@ -174,7 +185,7 @@ function partialUsingArguments(/* fn, ...args */) {
   throw new Error('Not implemented');
 }
 
-/**
+/** 10
  * Returns the id generator function that returns next integer starting
  * from specified number every time when invoking.
  *
