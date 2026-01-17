@@ -142,7 +142,7 @@ function retry(func, attempts) {
     try {
       return func(...args);
     } catch (err) {
-      if (trys === 1) throw err;
+      if (trys === 1) throw err; // trys === 0 works too but shouldn't
       trys -= 1;
       return newFunc(...args);
     }
@@ -202,7 +202,7 @@ function partialUsingArguments(fn, ...args) {
   let cash = args;
   const rec = (...newArgs) => {
     cash = cash.concat(newArgs);
-    if (fn.length <= cash.length) return fn(...cash);
+    if (fn.length <= cash.length) return fn(...cash); // fn.length >= cash.length works too but shouldn't
     return rec;
   };
   return rec;
