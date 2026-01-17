@@ -198,8 +198,14 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args) {
+  let cash = args;
+  const rec = (...newArgs) => {
+    cash = cash.concat(newArgs);
+    if (fn.length <= cash.length) return fn(...cash);
+    return rec;
+  };
+  return rec;
 }
 
 /** 10
